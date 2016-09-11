@@ -26,3 +26,4 @@ convert logicals to factors.
 print(convertMLBenchObjToTask("Ionosphere"))
 print(convertMLBenchObjToTask("mlbench.spirals", n = 100, sd = 0.1))
 }
+

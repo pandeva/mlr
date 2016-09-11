@@ -38,8 +38,10 @@ summarizeColumns(iris)
 \seealso{
 Other eda_and_preprocess: \code{\link{capLargeValues}},
   \code{\link{createDummyFeatures}},
+  \code{\link{createLagDiffFeatures}},
   \code{\link{dropFeatures}},
   \code{\link{mergeSmallFactorLevels}},
   \code{\link{normalizeFeatures}},
   \code{\link{removeConstantFeatures}}
 }
+

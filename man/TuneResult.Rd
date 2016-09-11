@@ -25,3 +25,4 @@ Object members:
   transform them, or, \code{as.data.frame{trafoOptPath(opt.path)}}}
 }
 }
+

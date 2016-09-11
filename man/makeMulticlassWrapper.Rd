@@ -55,6 +55,7 @@ Other wrapper: \code{\link{makeBaggingWrapper}},
   \code{\link{makeMultilabelStackingWrapper}},
   \code{\link{makeOverBaggingWrapper}},
   \code{\link{makePreprocWrapperCaret}},
+  \code{\link{makePreprocWrapperLambert}},
   \code{\link{makePreprocWrapper}},
   \code{\link{makeRemoveConstantFeaturesWrapper}},
   \code{\link{makeSMOTEWrapper}},
@@ -62,3 +63,4 @@ Other wrapper: \code{\link{makeBaggingWrapper}},
   \code{\link{makeUndersampleWrapper}},
   \code{\link{makeWeightedClassesWrapper}}
 }
+

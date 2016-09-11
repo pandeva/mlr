@@ -104,3 +104,4 @@ The following stacking methods are available:
   tmp = train(m, tsk)
   res = predict(tmp, tsk)
 }
+

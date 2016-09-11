@@ -38,3 +38,4 @@ Other task: \code{\link{getTaskClassLevels}},
   \code{\link{getTaskTargetNames}},
   \code{\link{getTaskType}}, \code{\link{subsetTask}}
 }
+

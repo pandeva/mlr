@@ -26,3 +26,4 @@ Note that if you want to merge several \code{\link{BenchmarkResult}}
   When merging \code{\link{BenchmarkResult}} objects with different measures,
   all missing measures will automatically be recomputed.
 }
+

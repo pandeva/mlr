@@ -11,3 +11,4 @@ Contains the task (\code{sonar.task}).
 See \code{\link[mlbench]{Sonar}}.
 }
 \keyword{data}
+

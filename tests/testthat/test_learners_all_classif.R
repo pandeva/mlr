@@ -1,4 +1,7 @@
-context("learners_all_classif")
+context("learners_all_classif1")
+
+detachAllPackages()
+R.utils::gcDLLs()
 
 test_that("learners work: classif ", {
 
@@ -20,10 +23,28 @@ test_that("learners work: classif ", {
     classif.h2o.randomForest = list(seed = getOption("mlr.debug.seed"))
   )
 
+
   # binary classif
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
     features = getTaskFeatureNames(binaryclass.task)[12:15])
-  lrns = mylist(task, create = TRUE)
+
+  #lrns = mylist(task, create = TRUE)
+  #lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
+  #lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
+
+  ######
+  # NOTE: properties = "numeric" and "twoclass" cause the DLL error
+  ######
+  # Testing Binary with all []:
+  # numerics [factors] [ordered] [missings] [weights] [prob] [oneclass] twoclass [multiclass]
+
+  # oneclass
+  lrns = mylist(task, create = TRUE, properties = "oneclass")
+  lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
+  lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
+
+  # multiclass
+  lrns = mylist(task, create = TRUE, properties = "multiclass")
   lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
   lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
 
@@ -50,7 +71,7 @@ test_that("learners work: classif ", {
   # classif with missing
   lrns = mylist("classif", properties = "missings", create = TRUE)
   lapply(lrns, testThatLearnerHandlesMissings, task = task, hyperpars = hyperpars)
-  
+
   # classif with oobpreds
   lrns = mylist("classif", properties = "oobpreds", create = TRUE)
   lapply(lrns, testThatGetOOBPredsWorks, task = task)
@@ -66,6 +87,7 @@ test_that("learners work: classif ", {
 
 
 test_that("weightedClassWrapper on all binary learners",  {
+  R.utils::gcDLLs()
   pos = getTaskDescription(binaryclass.task)$positive
   f = function(lrn, w) {
     lrn1 = makeLearner(lrn)
@@ -83,10 +105,12 @@ test_that("weightedClassWrapper on all binary learners",  {
     expect_true(all(cm1[, pos] <= cm2[, pos]))
     expect_true(all(cm2[, pos] <= cm3[, pos]))
   })
+  R.utils::gcDLLs()
 })
 
 
 test_that("WeightedClassWrapper on all multiclass learners",  {
+  R.utils::gcDLLs()
   levs = getTaskClassLevels(multiclass.task)
   f = function(lrn, w) {
     lrn1 = makeLearner(lrn)
@@ -111,4 +135,9 @@ test_that("WeightedClassWrapper on all multiclass learners",  {
     expect_true(all(cm3[, levs[3]] >= cm1[, levs[3]]))
     expect_true(all(cm3[, levs[3]] >= cm2[, levs[3]]))
   })
+  detachAllPackages()
+  R.utils::gcDLLs()
 })
+
+detachAllPackages()
+R.utils::gcDLLs()

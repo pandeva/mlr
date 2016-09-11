@@ -62,9 +62,11 @@ Other wrapper: \code{\link{makeBaggingWrapper}},
   \code{\link{makeMultilabelStackingWrapper}},
   \code{\link{makeOverBaggingWrapper}},
   \code{\link{makePreprocWrapperCaret}},
+  \code{\link{makePreprocWrapperLambert}},
   \code{\link{makeRemoveConstantFeaturesWrapper}},
   \code{\link{makeSMOTEWrapper}},
   \code{\link{makeTuneWrapper}},
   \code{\link{makeUndersampleWrapper}},
   \code{\link{makeWeightedClassesWrapper}}
 }
+

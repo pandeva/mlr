@@ -20,3 +20,4 @@ Default is all factor, character and logical columns of \code{obj}.}
 \description{
 Characters and logicals will be treated as factors.
 }
+

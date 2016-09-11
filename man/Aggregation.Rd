@@ -23,3 +23,4 @@ Object members:
 \seealso{
 \code{\link{makeAggregation}}
 }
+

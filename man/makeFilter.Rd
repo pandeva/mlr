@@ -3,28 +3,9 @@
 \docType{data}
 \name{makeFilter}
 \alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
 \alias{rf.importance}
-\alias{makeFilter}
 \alias{rf.min.depth}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
 \alias{univariate}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
-\alias{makeFilter}
 \title{Create a feature filter.}
 \format{An object of class \code{Filter} of length 6.}
 \usage{
@@ -176,3 +157,4 @@ Kononenko, Igor et al. Overcoming the myopia of inductive learning algorithms
 with RELIEFF (1997), Applied Intelligence, 7(1), p39-55.
 }
 \keyword{datasets}
+

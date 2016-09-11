@@ -20,3 +20,4 @@ Same output structure as in [\code{\link{predictLearner}}].
 This function is mostly for internal usage. To get out-of-bag predictions use \code{\link{getOOBPreds}}.
 }
 \keyword{internal}
+

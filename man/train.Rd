@@ -49,3 +49,4 @@ print(mod)
 \seealso{
 \code{\link{predict.WrappedModel}}
 }
+

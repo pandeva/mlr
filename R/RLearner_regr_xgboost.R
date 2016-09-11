@@ -49,7 +49,7 @@ makeRLearner.regr.xgboost = function() {
 #' @export
 trainLearner.regr.xgboost = function(.learner, .task, .subset, .weights = NULL,  ...) {
   parlist = list(...)
-  
+
   parlist$label = getTaskData(.task, .subset, target.extra = TRUE)$target
   parlist$data = data.matrix(getTaskData(.task, .subset, target.extra = TRUE)$data)
 
@@ -58,7 +58,7 @@ trainLearner.regr.xgboost = function(.learner, .task, .subset, .weights = NULL, 
 
   if (!is.null(.weights))
     parlist$data = xgboost::xgb.DMatrix(data = parlist$data, label = parlist$label, weight = .weights)
-  
+
   do.call(xgboost::xgboost, parlist)
 }
 

@@ -11,3 +11,4 @@ Contains the task (\code{agri.task}).
 See \code{\link[cluster]{agriculture}}.
 }
 \keyword{data}
+

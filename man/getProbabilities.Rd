@@ -14,3 +14,4 @@ getProbabilities(pred, cl)
 \description{
 Deprecated, use \code{getPredictionProbabilities} instead.
 }
+

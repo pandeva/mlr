@@ -55,9 +55,11 @@ getPredictionProbabilities(p)
 }
 \seealso{
 Other predict: \code{\link{asROCRPrediction}},
+  \code{\link{forecast.WrappedModel}},
   \code{\link{getPredictionProbabilities}},
   \code{\link{getPredictionResponse}},
   \code{\link{plotViperCharts}},
   \code{\link{setPredictThreshold}},
   \code{\link{setPredictType}}
 }
+

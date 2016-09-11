@@ -14,13 +14,15 @@ Prediction object.}
 Converts predictions to a format package ROCR can handle.
 }
 \seealso{
-Other roc: \code{\link{calculateROCMeasures}},
-  \code{\link{plotViperCharts}}
-
-Other predict: \code{\link{getPredictionProbabilities}},
+Other predict: \code{\link{forecast.WrappedModel}},
+  \code{\link{getPredictionProbabilities}},
   \code{\link{getPredictionResponse}},
   \code{\link{plotViperCharts}},
   \code{\link{predict.WrappedModel}},
   \code{\link{setPredictThreshold}},
   \code{\link{setPredictType}}
+
+Other roc: \code{\link{calculateROCMeasures}},
+  \code{\link{plotViperCharts}}
 }
+

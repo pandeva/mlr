@@ -2,9 +2,9 @@
 % Please edit documentation in R/listLearners.R
 \name{listLearners}
 \alias{listLearners}
-\alias{listLearners.default}
-\alias{listLearners.character}
 \alias{listLearners.Task}
+\alias{listLearners.character}
+\alias{listLearners.default}
 \title{Find matching learning algorithms.}
 \usage{
 listLearners(obj = NA_character_, properties = character(0L),
@@ -80,3 +80,4 @@ task = makeClassifTask(data = data, target = "Species")
 listLearners(task)
 }
 }
+

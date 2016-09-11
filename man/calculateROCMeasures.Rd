@@ -59,7 +59,6 @@ The element for the false omission rate in the resulting object is not called \c
 \itemize{
 \item \code{print}: 
 }}
-
 \examples{
 lrn = makeLearner("classif.rpart", predict.type = "prob")
 fit = train(lrn, sonar.task)
@@ -68,9 +67,6 @@ calculateROCMeasures(pred)
 
 }
 \seealso{
-Other roc: \code{\link{asROCRPrediction}},
-  \code{\link{plotViperCharts}}
-
 Other performance: \code{\link{ConfusionMatrix}},
   \code{\link{calculateConfusionMatrix}},
   \code{\link{estimateRelativeOverfitting}},
@@ -78,4 +74,8 @@ Other performance: \code{\link{ConfusionMatrix}},
   \code{\link{makeCustomResampledMeasure}},
   \code{\link{makeMeasure}}, \code{\link{measures}},
   \code{\link{performance}}
+
+Other roc: \code{\link{asROCRPrediction}},
+  \code{\link{plotViperCharts}}
 }
+

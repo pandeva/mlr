@@ -11,3 +11,4 @@ Contains the task (\code{iris.task}).
 See \code{\link[datasets]{iris}}.
 }
 \keyword{data}
+

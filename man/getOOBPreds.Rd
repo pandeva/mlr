@@ -35,3 +35,4 @@ oob = getOOBPreds(mod, sonar.task)
 oob
 performance(oob, measures = list(auc, mmce))
 }
+

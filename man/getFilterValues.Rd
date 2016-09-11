@@ -39,6 +39,13 @@ Other filter: \code{\link{filterFeatures}},
   \code{\link{plotFilterValuesGGVIS}},
   \code{\link{plotFilterValues}}
 
+Other filter: \code{\link{filterFeatures}},
+  \code{\link{generateFilterValuesData}},
+  \code{\link{getFilteredFeatures}},
+  \code{\link{makeFilterWrapper}},
+  \code{\link{plotFilterValuesGGVIS}},
+  \code{\link{plotFilterValues}}
+
 Other generate_plot_data: \code{\link{generateCalibrationData}},
   \code{\link{generateCritDifferencesData}},
   \code{\link{generateFeatureImportanceData}},
@@ -48,11 +55,5 @@ Other generate_plot_data: \code{\link{generateCalibrationData}},
   \code{\link{generatePartialDependenceData}},
   \code{\link{generateThreshVsPerfData}},
   \code{\link{plotFilterValues}}
-
-Other filter: \code{\link{filterFeatures}},
-  \code{\link{generateFilterValuesData}},
-  \code{\link{getFilteredFeatures}},
-  \code{\link{makeFilterWrapper}},
-  \code{\link{plotFilterValuesGGVIS}},
-  \code{\link{plotFilterValues}}
 }
+

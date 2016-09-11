@@ -49,6 +49,12 @@ Montanes, E. et al. (2013)
 Artificial Intelligence Center, University of Oviedo at Gijon, Spain.
 }
 \seealso{
+Other multilabel: \code{\link{getMultilabelBinaryPerformances}},
+  \code{\link{makeMultilabelBinaryRelevanceWrapper}},
+  \code{\link{makeMultilabelClassifierChainsWrapper}},
+  \code{\link{makeMultilabelDBRWrapper}},
+  \code{\link{makeMultilabelNestedStackingWrapper}}
+
 Other wrapper: \code{\link{makeBaggingWrapper}},
   \code{\link{makeConstantClassWrapper}},
   \code{\link{makeCostSensClassifWrapper}},
@@ -64,16 +70,12 @@ Other wrapper: \code{\link{makeBaggingWrapper}},
   \code{\link{makeMultilabelNestedStackingWrapper}},
   \code{\link{makeOverBaggingWrapper}},
   \code{\link{makePreprocWrapperCaret}},
+  \code{\link{makePreprocWrapperLambert}},
   \code{\link{makePreprocWrapper}},
   \code{\link{makeRemoveConstantFeaturesWrapper}},
   \code{\link{makeSMOTEWrapper}},
   \code{\link{makeTuneWrapper}},
   \code{\link{makeUndersampleWrapper}},
   \code{\link{makeWeightedClassesWrapper}}
-
-Other multilabel: \code{\link{getMultilabelBinaryPerformances}},
-  \code{\link{makeMultilabelBinaryRelevanceWrapper}},
-  \code{\link{makeMultilabelClassifierChainsWrapper}},
-  \code{\link{makeMultilabelDBRWrapper}},
-  \code{\link{makeMultilabelNestedStackingWrapper}}
 }
+

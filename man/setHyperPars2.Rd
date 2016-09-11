@@ -16,3 +16,4 @@ List of named (hyper)parameter settings.}
 \description{
 Only exported for internal use.
 }
+

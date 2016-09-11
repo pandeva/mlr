@@ -27,3 +27,4 @@ Other performance: \code{\link{calculateConfusionMatrix}},
   \code{\link{makeMeasure}}, \code{\link{measures}},
   \code{\link{performance}}
 }
+
