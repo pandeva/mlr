@@ -1,7 +1,4 @@
-context("learners_all_classif1")
-
-detachAllPackages()
-R.utils::gcDLLs()
+context("learners_all_classif")
 
 test_that("learners work: classif ", {
 
@@ -10,9 +7,9 @@ test_that("learners work: classif ", {
     classif.boosting = list(mfinal = 2L),
     classif.cforest = list(mtry = 1L),
     classif.bartMachine = list(verbose = FALSE, run_in_sample = FALSE,
-      # without this (and despite use_missing_data being TRUE), the test with missing data fails with a null point exception, which manifests itself as a completely different rJava error in the test
-      replace_missing_data_with_x_j_bar = TRUE,
-      num_iterations_after_burn_in = 10L),
+                               # without this (and despite use_missing_data being TRUE), the test with missing data fails with a null point exception, which manifests itself as a completely different rJava error in the test
+                               replace_missing_data_with_x_j_bar = TRUE,
+                               num_iterations_after_burn_in = 10L),
     classif.bdk = list(ydim = 2L),
     classif.earth = list(degree = 3L, nprune = 2L),
     classif.gbm = list(bag.fraction = 1, n.minobsinnode = 1),
@@ -23,28 +20,10 @@ test_that("learners work: classif ", {
     classif.h2o.randomForest = list(seed = getOption("mlr.debug.seed"))
   )
 
-
   # binary classif
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
-    features = getTaskFeatureNames(binaryclass.task)[12:15])
-
-  #lrns = mylist(task, create = TRUE)
-  #lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
-  #lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
-
-  ######
-  # NOTE: properties = "numeric" and "twoclass" cause the DLL error
-  ######
-  # Testing Binary with all []:
-  # numerics [factors] [ordered] [missings] [weights] [prob] [oneclass] twoclass [multiclass]
-
-  # oneclass
-  lrns = mylist(task, create = TRUE, properties = "oneclass")
-  lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
-  lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
-
-  # multiclass
-  lrns = mylist(task, create = TRUE, properties = "multiclass")
+                    features = getTaskFeatureNames(binaryclass.task)[12:15])
+  lrns = mylist(task, create = TRUE)
   lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
   lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
 
@@ -59,14 +38,14 @@ test_that("learners work: classif ", {
   # binary classif with prob
   lrns = mylist(binaryclass.task, properties = "prob", create = TRUE)
   lapply(lrns, testBasicLearnerProperties, task = binaryclass.task,
-    hyperpars = hyperpars, pred.type = "prob")
+         hyperpars = hyperpars, pred.type = "prob")
 
   # binary classif with weights
   lrns = mylist("classif", properties = "weights", create = TRUE)
   lapply(lrns, testThatLearnerRespectsWeights, hyperpars = hyperpars,
-    task = binaryclass.task, train.inds = binaryclass.train.inds, test.inds = binaryclass.test.inds,
-    weights = rep(c(10000L, 1L), c(10L, length(binaryclass.train.inds) - 10L)),
-    pred.type = "prob", get.pred.fun = getPredictionProbabilities)
+         task = binaryclass.task, train.inds = binaryclass.train.inds, test.inds = binaryclass.test.inds,
+         weights = rep(c(10000L, 1L), c(10L, length(binaryclass.train.inds) - 10L)),
+         pred.type = "prob", get.pred.fun = getPredictionProbabilities)
 
   # classif with missing
   lrns = mylist("classif", properties = "missings", create = TRUE)
@@ -87,7 +66,6 @@ test_that("learners work: classif ", {
 
 
 test_that("weightedClassWrapper on all binary learners",  {
-  R.utils::gcDLLs()
   pos = getTaskDescription(binaryclass.task)$positive
   f = function(lrn, w) {
     lrn1 = makeLearner(lrn)
@@ -105,12 +83,10 @@ test_that("weightedClassWrapper on all binary learners",  {
     expect_true(all(cm1[, pos] <= cm2[, pos]))
     expect_true(all(cm2[, pos] <= cm3[, pos]))
   })
-  R.utils::gcDLLs()
 })
 
 
 test_that("WeightedClassWrapper on all multiclass learners",  {
-  R.utils::gcDLLs()
   levs = getTaskClassLevels(multiclass.task)
   f = function(lrn, w) {
     lrn1 = makeLearner(lrn)
@@ -135,9 +111,4 @@ test_that("WeightedClassWrapper on all multiclass learners",  {
     expect_true(all(cm3[, levs[3]] >= cm1[, levs[3]]))
     expect_true(all(cm3[, levs[3]] >= cm2[, levs[3]]))
   })
-  detachAllPackages()
-  R.utils::gcDLLs()
 })
-
-detachAllPackages()
-R.utils::gcDLLs()
