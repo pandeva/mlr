@@ -151,7 +151,7 @@ checkTaskData = function(data, cols = names(data)) {
         stopf("Column '%s' contains empty factor levels.", cn)
     } else if (is.POSIXt(x)){
       if (any(duplicated(x)))
-        stopf("There are duplicate dates")
+        warning("There are duplicate dates")
     } else {
       stopf("Unsupported feature type (%s) in column '%s'.", class(x)[1L], cn)
     }
