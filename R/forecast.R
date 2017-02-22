@@ -66,8 +66,8 @@ forecast.WrappedModel = function(object, newdata = NULL, task, h = 10, ...){
   if (any(c("fcregr","mfcregr") %in% model$learner$type ))
     if (!missing(newdata))
       return(predict(object, newdata = newdata))
-    else
-      return(predict(object, task = task))
+  else
+    return(predict(object, task = task))
 
   if (!missing(task))
     stop("Tasks are only accepted for fcregr and mfcregr tasks.
@@ -168,12 +168,12 @@ makeForecast = function(.data, .newdata, .proc.vals, .h, .td, .model, ...){
     .data = rbind(.data,NA)
     # The dates here will be thrown away later
     times = as.POSIXct("1992-01-14") + lubridate::days(1:I(nrow(.data)))
-    #dat.xts = xts::xts(.data, order.by = times)
-    #colnames(dat.xts) = .td$target
+    dat.xts = xts::xts(.data, order.by = times)
+    colnames(dat.xts) = .td$target
 
     # get lag structure
     lagdiff.func = function(...){
-      createLagDiffFeatures(obj = .data,...)
+      createLagDiffFeatures(obj = dat.xts,...)
     }
     data.lag = do.call(lagdiff.func, .proc.vals)
     data.lag = as.data.frame(data.lag)

@@ -2,11 +2,12 @@
 % Please edit documentation in R/createLagDiffFeatures.R
 \name{createLagDiffFeatures}
 \alias{createLagDiffFeatures}
-\title{Generate lags and differences for feature variables 2}
+\title{Generate lags and differences for feature variables}
 \usage{
-createLagDiffFeatures(obj, lag = 0L, difference = 0L, cols = NULL,
-  target = character(0L), frequency = 1L, na.pad = TRUE,
-  return.nonlag = TRUE, stratify = NULL)
+createLagDiffFeatures(obj, lag = 0L, difference = 0L, difference.lag = 1L,
+  cols = NULL, target = character(0L), seasonal.lag = 0L,
+  seasonal.difference = 0L, seasonal.difference.lag = 1L, frequency = 1L,
+  na.pad = TRUE, return.nonlag = TRUE)
 }
 \arguments{
 \item{obj}{[\code{data.frame} | \code{\link{Task}}]\cr
@@ -17,6 +18,9 @@ An integer vector of lag lengths.}
 
 \item{difference}{[\code{integer}]\cr
 An integer of the order of differencing}
+
+\item{difference.lag}{[\code{integer}]\cr
+An integer denoting the period to difference over}
 
 \item{cols}{[\code{character}]\cr
 A character vector of columns to create lag features for.
@@ -33,6 +37,15 @@ For multilabel classification these are the names of logical columns that indica
 a class label is present and the number of target variables corresponds to the number of
 classes.}
 
+\item{seasonal.lag}{[\code{integer}]\cr
+An integer vector of seasonal lag lengths, made as \code{seasonal.lag * frequency}}
+
+\item{seasonal.difference}{[\code{integer}]\cr
+An integer of the seasonal order of difference, made as \code{seasonal.difference * frequency}}
+
+\item{seasonal.difference.lag}{[\code{integer}]\cr
+An integer denoting the period to seasonaly difference over}
+
 \item{frequency}{[\code{integer}]\cr
 An integer representing the periodicity in the time series. If frequency is declared in the task,
 the task frequency will be used.}
@@ -42,12 +55,6 @@ A logical to denote whether the data should be padded to the original size with 
 
 \item{return.nonlag}{[\code{logical}]\cr
 A logical to denote whether the original unlagged features should be returned}
-
-\item{difference.lag}{[\code{integer}]\cr
-An integer denoting the period to difference over}
-
-\item{seasonal.difference.lag}{[\code{integer}]\cr
-An integer denoting the period to seasonaly difference over}
 }
 \description{
 Replace all variables with their generated lagged and differenced variables.
