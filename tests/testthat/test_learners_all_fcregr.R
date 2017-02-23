@@ -19,11 +19,11 @@ test_that("learners work: fcregr ", {
   # normal fcregr
   lrns = mylist("fcregr", create = TRUE)
   lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
-  lapply(lrns, testThatLearnerCanTrainPredict, task = task, hyperpars = hyperpars)
+  lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
 
   # fcregr with quantile
   lrns = mylist(task, properties = "quantile", create = TRUE)
-  lapply(lrns, testThatLearnerCanTrainPredict, task = task, hyperpars = hyperpars,
+  lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars,
          pred.type = "quantile")
 
 
