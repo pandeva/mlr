@@ -28,7 +28,8 @@ getLearnerTable = function() {
   return(tab)
 }
 
-filterLearnerTable = function(tab = getLearnerTable(), types = character(0L), properties = character(0L), check.packages = TRUE) {
+filterLearnerTable = function(tab = getLearnerTable(), types = character(0L), properties = character(0L),
+                              check.packages = TRUE, subset = NULL) {
   contains = function(lhs, rhs) all(lhs %in% rhs)
 
   if (check.packages)
@@ -40,6 +41,10 @@ filterLearnerTable = function(tab = getLearnerTable(), types = character(0L), pr
   if (length(properties) > 0L) {
     i = vlapply(tab$properties, contains, lhs = properties)
     tab = tab[i]
+  }
+
+  if (!is.null(subset)){
+    tab = tab[subset]
   }
 
   return(tab)
@@ -93,7 +98,7 @@ filterLearnerTable = function(tab = getLearnerTable(), types = character(0L), pr
 #' }
 #' @export
 listLearners  = function(obj = NA_character_, properties = character(0L),
-  quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, create = FALSE) {
+  quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, subset = NULL, create = FALSE) {
 
   assertSubset(properties, listLearnerProperties())
   assertFlag(quiet)
@@ -107,14 +112,17 @@ listLearners  = function(obj = NA_character_, properties = character(0L),
 #' @export
 #' @rdname listLearners
 listLearners.default  = function(obj = NA_character_, properties = character(0L),
-  quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, create = FALSE) {
+                                 quiet = TRUE, warn.missing.packages = TRUE,
+                                 check.packages = TRUE, subset = NULL, create = FALSE) {
 
-  listLearners.character(obj = NA_character_, properties, quiet, warn.missing.packages, check.packages, create)
+  listLearners.character(obj = NA_character_, properties, quiet, warn.missing.packages, check.packages, subset, create)
 }
 
 #' @export
 #' @rdname listLearners
-listLearners.character  = function(obj = NA_character_, properties = character(0L), quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, create = FALSE) {
+listLearners.character  = function(obj = NA_character_, properties = character(0L),
+                                   quiet = TRUE, warn.missing.packages = TRUE,
+                                   check.packages = TRUE, subset = NULL, create = FALSE) {
   if (!isScalarNA(obj))
     assertSubset(obj, listTaskTypes())
   tab = getLearnerTable()
@@ -122,7 +130,7 @@ listLearners.character  = function(obj = NA_character_, properties = character(0
   if (warn.missing.packages && !all(tab$installed))
     warningf("The following learners could not be constructed, probably because their packages are not installed:\n%s\nCheck ?learners to see which packages you need or install mlr with all suggestions.", collapse(tab[!tab$installed]$id))
 
-  tab = filterLearnerTable(tab, types = obj, properties = properties, check.packages = check.packages && !create)
+  tab = filterLearnerTable(tab, types = obj, properties = properties, check.packages = check.packages && !create, subset = subset)
 
   if (create)
     return(lapply(tab$id[tab$installed], makeLearner))
@@ -139,7 +147,7 @@ listLearners.character  = function(obj = NA_character_, properties = character(0
 #' @export
 #' @rdname listLearners
 listLearners.Task = function(obj = NA_character_, properties = character(0L),
-  quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, create = FALSE) {
+  quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, subset = NULL,  create = FALSE) {
 
   task = obj
   td = getTaskDescription(task)
@@ -155,7 +163,7 @@ listLearners.Task = function(obj = NA_character_, properties = character(0L),
     if (length(td$class.levels) >= 3L) props = c(props, "multiclass")
   }
 
-  listLearners.character(td$type, union(props, properties), quiet, warn.missing.packages, check.packages, create)
+  listLearners.character(td$type, union(props, properties), quiet, warn.missing.packages, check.packages, subset = subset, create)
 }
 
 #' @export

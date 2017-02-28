@@ -1,6 +1,6 @@
 context("learners_all_classif")
 
-test_that("learners work: classif ", {
+test_that("learners work: classif 1-40 ", {
 
   # settings to make learners faster and deal with small data size
   hyperpars = list(
@@ -23,9 +23,62 @@ test_that("learners work: classif ", {
   # binary classif
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
-  lrns = mylist(task, create = TRUE)
+  lrns = mylist(task,subset = 1:40, create = TRUE)
   lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
   lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
+})
+
+test_that("learners work: classif 41-87", {
+
+  # settings to make learners faster and deal with small data size
+  hyperpars = list(
+    classif.boosting = list(mfinal = 2L),
+    classif.cforest = list(mtry = 1L),
+    classif.bartMachine = list(verbose = FALSE, run_in_sample = FALSE,
+                               # without this (and despite use_missing_data being TRUE), the test with missing data fails with a null point exception, which manifests itself as a completely different rJava error in the test
+                               replace_missing_data_with_x_j_bar = TRUE,
+                               num_iterations_after_burn_in = 10L),
+    classif.bdk = list(ydim = 2L),
+    classif.earth = list(degree = 3L, nprune = 2L),
+    classif.gbm = list(bag.fraction = 1, n.minobsinnode = 1),
+    classif.lssvm = list(kernel = "rbfdot", reduced = FALSE),
+    classif.nodeHarvest = list(nodes = 100L, nodesize = 5L),
+    classif.xyf = list(ydim = 2L),
+    classif.h2o.deeplearning = list(hidden = 2L, seed = getOption("mlr.debug.seed"), reproducible = TRUE),
+    classif.h2o.randomForest = list(seed = getOption("mlr.debug.seed"))
+  )
+
+  # binary classif
+  task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
+                    features = getTaskFeatureNames(binaryclass.task)[12:15])
+  lrns = mylist(task,subset = 41:87, create = TRUE)
+  lapply(lrns, testThatLearnerParamDefaultsAreInParamSet)
+  lapply(lrns, testBasicLearnerProperties, task = task, hyperpars = hyperpars)
+})
+
+test_that("learners work: classif 3", {
+
+  # settings to make learners faster and deal with small data size
+  hyperpars = list(
+    classif.boosting = list(mfinal = 2L),
+    classif.cforest = list(mtry = 1L),
+    classif.bartMachine = list(verbose = FALSE, run_in_sample = FALSE,
+                               # without this (and despite use_missing_data being TRUE), the test with missing data fails with a null point exception, which manifests itself as a completely different rJava error in the test
+                               replace_missing_data_with_x_j_bar = TRUE,
+                               num_iterations_after_burn_in = 10L),
+    classif.bdk = list(ydim = 2L),
+    classif.earth = list(degree = 3L, nprune = 2L),
+    classif.gbm = list(bag.fraction = 1, n.minobsinnode = 1),
+    classif.lssvm = list(kernel = "rbfdot", reduced = FALSE),
+    classif.nodeHarvest = list(nodes = 100L, nodesize = 5L),
+    classif.xyf = list(ydim = 2L),
+    classif.h2o.deeplearning = list(hidden = 2L, seed = getOption("mlr.debug.seed"), reproducible = TRUE),
+    classif.h2o.randomForest = list(seed = getOption("mlr.debug.seed"))
+  )
+
+  # binary classif
+  task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
+                    features = getTaskFeatureNames(binaryclass.task)[12:15])
 
   # binary classif with factors
   lrns = mylist("classif", properties = "factors", create = TRUE)
