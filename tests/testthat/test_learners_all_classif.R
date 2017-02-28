@@ -44,16 +44,12 @@ test_that("learners work: classif prob and weights", {
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
 
   # binary classif with prob
-  lrns = mylist(binaryclass.task, properties = "prob", create = FALSE)
-  lrns = lrns[!grepl("mboost",lrns$package),]
-  lrns = lapply(lrns$class[subset], makeLearner)
+  lrns = mylist(binaryclass.task, properties = "prob", create = TRUE)
   lapply(lrns, testBasicLearnerProperties, task = binaryclass.task,
     hyperpars = hyperpars, pred.type = "prob")
 
   # binary classif with weights
-  lrns = mylist("classif", properties = "weights", create = FALSE)
-  lrns = lrns[!grepl("mboost",lrns$package),]
-  lrns = lapply(lrns$class[subset], makeLearner)
+  lrns = mylist("classif", properties = "weights", create = TRUE)
   lapply(lrns, testThatLearnerRespectsWeights, hyperpars = hyperpars,
     task = binaryclass.task, train.inds = binaryclass.train.inds, test.inds = binaryclass.test.inds,
     weights = rep(c(10000L, 1L), c(10L, length(binaryclass.train.inds) - 10L)),
@@ -69,20 +65,14 @@ test_that("learners work: classif missing and oobpreds", {
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
 
   # classif with missing
-  lrns = mylist("classif", properties = "missings", create = FALSE)
-  lrns = lrns[!grepl("mboost",lrns$package),]
-  lrns = lapply(lrns$class[subset], makeLearner)
+  lrns = mylist("classif", properties = "missings", create = TRUE)
   lapply(lrns, testThatLearnerHandlesMissings, task = task, hyperpars = hyperpars)
 
   # classif with oobpreds
-  lrns = mylist("classif", properties = "oobpreds", create = FALSE)
-  lrns = lrns[!grepl("mboost",lrns$package),]
-  lrns = lapply(lrns$class[subset], makeLearner)
+  lrns = mylist("classif", properties = "oobpreds", create = TRUE)
   lapply(lrns, testThatGetOOBPredsWorks, task = task)
   # classif with oobpreds and probability
-  lrns = mylist("classif", properties = c("oobpreds", "prob"), create = FALSE)
-  lrns = lrns[!grepl("mboost",lrns$package),]
-  lrns = lapply(lrns$class[subset], makeLearner)
+  lrns = mylist("classif", properties = c("oobpreds", "prob"), create = TRUE)
   lrns = lapply(lrns, setPredictType, predict.type = "prob")
   lapply(lrns, testThatGetOOBPredsWorks, task = task)
 })
@@ -94,9 +84,7 @@ test_that("learners work: classif featimp", {
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
   # classif with variable importance
-  lrns = mylist("classif", properties = "featimp", create = FALSE)
-  lrns = lrns[!grepl("mboost",lrns$package),]
-  lrns = lapply(lrns$class[subset], makeLearner)
+  lrns = mylist("classif", properties = "featimp", create = TRUE)
   lapply(lrns, testThatLearnerCanCalculateImportance, task = task, hyperpars = hyperpars)
 })
 
