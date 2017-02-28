@@ -15,12 +15,17 @@ test_that("learners work: classif 41:60", {
   testThatDefaultClassifAllLearners(41:60)
 })
 
-test_that("learners work: classif 61:40", {
+test_that("learners work: classif 61:87", {
 
-  testThatDefaultClassifAllLearners(61:80)
+  testThatDefaultClassifAllLearners(61:87)
 })
 
 test_that("learners work: classif", {
+
+  hyperpars = testThatGenerateClassifLearnerHyperPars()
+  # binary classif
+  task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
+                    features = getTaskFeatureNames(binaryclass.task)[12:15])
 
   # binary classif with factors
   lrns = mylist("classif", properties = "factors", create = TRUE)
