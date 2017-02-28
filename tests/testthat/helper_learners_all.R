@@ -213,7 +213,7 @@ testThatLearnerCanCalculateImportance = function(lrn, task, hyperpars) {
 testThatLearnerParamDefaultsAreInParamSet = function(lrn) {
   pars = lrn$par.set$pars
   pv = lrn$par.vals
-  expect_true(isSubset(names(pv), names(pars)))
+  expect_true(BBmisc::isSubset(names(pv), names(pars)))
 }
 
 
