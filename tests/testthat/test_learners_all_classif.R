@@ -20,7 +20,7 @@ test_that("learners work: classif 61:87", {
   testThatDefaultClassifAllLearners(61:87)
 })
 
-test_that("learners work: classif", {
+test_that("learners work: classif factor and ordered factor", {
 
   hyperpars = testThatGenerateClassifLearnerHyperPars()
   # binary classif
@@ -34,6 +34,14 @@ test_that("learners work: classif", {
   # binary classif with ordered factors
   lrns = mylist("classif", properties = "ordered", create = TRUE)
   lapply(lrns, testThatLearnerHandlesOrderedFactors, task = task, hyperpars = hyperpars)
+})
+
+test_that("learners work: classif prob and weights", {
+
+  hyperpars = testThatGenerateClassifLearnerHyperPars()
+  # binary classif
+  task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
+                    features = getTaskFeatureNames(binaryclass.task)[12:15])
 
   # binary classif with prob
   lrns = mylist(binaryclass.task, properties = "prob", create = TRUE)
@@ -47,6 +55,15 @@ test_that("learners work: classif", {
     weights = rep(c(10000L, 1L), c(10L, length(binaryclass.train.inds) - 10L)),
     pred.type = "prob", get.pred.fun = getPredictionProbabilities)
 
+})
+
+test_that("learners work: classif missing and oobpreds", {
+
+  hyperpars = testThatGenerateClassifLearnerHyperPars()
+  # binary classif
+  task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
+                    features = getTaskFeatureNames(binaryclass.task)[12:15])
+
   # classif with missing
   lrns = mylist("classif", properties = "missings", create = TRUE)
   lapply(lrns, testThatLearnerHandlesMissings, task = task, hyperpars = hyperpars)
@@ -58,7 +75,14 @@ test_that("learners work: classif", {
   lrns = mylist("classif", properties = c("oobpreds", "prob"), create = TRUE)
   lrns = lapply(lrns, setPredictType, predict.type = "prob")
   lapply(lrns, testThatGetOOBPredsWorks, task = task)
+})
 
+test_that("learners work: classif missing and oobpreds", {
+
+  hyperpars = testThatGenerateClassifLearnerHyperPars()
+  # binary classif
+  task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
+                    features = getTaskFeatureNames(binaryclass.task)[12:15])
   # classif with variable importance
   lrns = mylist("classif", properties = "featimp", create = TRUE)
   lapply(lrns, testThatLearnerCanCalculateImportance, task = task, hyperpars = hyperpars)
