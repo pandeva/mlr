@@ -123,7 +123,7 @@ listLearners.default  = function(obj = NA_character_, properties = character(0L)
 #' @export
 #' @rdname listLearners
 listLearners.character  = function(obj = NA_character_, properties = character(0L), quiet = TRUE,
-                                   warn.missing.packages = TRUE, check.packages = TRUE, subset = subset, create = FALSE) {
+                                   warn.missing.packages = TRUE, check.packages = TRUE, subset = NULL, create = FALSE) {
   if (!isScalarNA(obj))
     assertSubset(obj, listTaskTypes())
   tab = getLearnerTable()
@@ -148,7 +148,7 @@ listLearners.character  = function(obj = NA_character_, properties = character(0
 #' @export
 #' @rdname listLearners
 listLearners.Task = function(obj = NA_character_, properties = character(0L),
-  quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, subset = subset, create = FALSE) {
+  quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE, subset = NULL, create = FALSE) {
 
   task = obj
   td = getTaskDescription(task)

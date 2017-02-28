@@ -29,3 +29,4 @@ test_that("listLearners printer (#1336)", {
   x1 = listLearners(create = FALSE, warn.missing.packages = FALSE)
   capture.output(print(x1), file = NULL)
 })
+
