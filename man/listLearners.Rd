@@ -9,19 +9,19 @@
 \usage{
 listLearners(obj = NA_character_, properties = character(0L),
   quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE,
-  create = FALSE)
+  subset = NULL, create = FALSE)
 
 \method{listLearners}{default}(obj = NA_character_,
   properties = character(0L), quiet = TRUE, warn.missing.packages = TRUE,
-  check.packages = TRUE, create = FALSE)
+  check.packages = TRUE, subset = NULL, create = FALSE)
 
 \method{listLearners}{character}(obj = NA_character_,
   properties = character(0L), quiet = TRUE, warn.missing.packages = TRUE,
-  check.packages = TRUE, create = FALSE)
+  check.packages = TRUE, subset = subset, create = FALSE)
 
 \method{listLearners}{Task}(obj = NA_character_, properties = character(0L),
   quiet = TRUE, warn.missing.packages = TRUE, check.packages = TRUE,
-  create = FALSE)
+  subset = subset, create = FALSE)
 }
 \arguments{
 \item{obj}{[\code{character(1)} | \code{\link{Task}}]\cr
@@ -48,6 +48,10 @@ Check if required packages are installed. Calls
 If \code{create} is \code{FALSE} and \code{check.packages} is \code{TRUE} the returned table only contains learners whose dependencies are installed.
 Default is \code{TRUE}. If set to \code{FALSE}, learners that cannot
 actually be constructed because of missing packages may be returned.}
+
+\item{subset}{[\code{integer | logical}]\cr
+Used mainly for testing. Selected subset of learners to return. Either a logical vector or an index vector.
+By default all learners are returned.}
 
 \item{create}{[\code{logical(1)}]\cr
 Instantiate objects (or return info table)?
