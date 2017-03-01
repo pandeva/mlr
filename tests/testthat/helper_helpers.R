@@ -218,7 +218,7 @@ testBootstrap = function(t.name, df, target, iters = 3, parset = list(), tune.tr
 mylist = function(..., create = FALSE) {
   lrns = listLearners(..., create = create)
   if (create) {
-    ids = BBmisc::extractSubList(lrns, "id")
+    ids = extractSubList(lrns, "id")
     return(lrns[!grepl("mock", ids)])
   } else {
     ids = lrns$class
