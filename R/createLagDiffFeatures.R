@@ -57,7 +57,7 @@ createLagDiffFeatures = function(obj, lag = 0L, difference = 0L, difference.lag 
   assertCharacter(target, any.missing = FALSE)
   if (!is.null(cols))
     assertCharacter(cols, any.missing = FALSE)
-  
+
   UseMethod("createLagDiffFeatures")
 }
 
@@ -76,10 +76,10 @@ createLagDiffFeatures.xts = function(obj, lag = 0L, difference = 0L, difference.
   } else {
     cols = work.cols
   }
-  
+
   seasonal.lag        = seasonal.lag * frequency
   seasonal.difference = seasonal.difference * frequency
-  
+
   if (any(lag > 0L) && (difference > 0L)){
     # FIXME: xts does not support lagging characters more than once
     ## we use an lapply to get around this
@@ -94,8 +94,8 @@ createLagDiffFeatures.xts = function(obj, lag = 0L, difference = 0L, difference.
   } else {
     xLagDiff = NULL
   }
-  
-  
+
+
   if (frequency > 1L){
     if (any(seasonal.lag > 0L) && (seasonal.difference > 0L)){
       xSeasonLagDiff = lapply(seasonal.lag,function(i) lag.xts(obj,k = i))
@@ -123,7 +123,7 @@ createLagDiffFeatures.xts = function(obj, lag = 0L, difference = 0L, difference.
                                       rep(seasonal.lag,each = length(work.cols)),
                                       "_diff",
                                       rep(seasonal.difference,each = length(work.cols)))
-  
+
   if (!is.null(xLagDiff) && !is.null(xSeasonLagDiff)){
     repeatedCols = !(colnames(xLagDiff) %in% colnames(xSeasonLagDiff))
     x = cbind(xLagDiff[,repeatedCols],xSeasonLagDiff)
@@ -134,14 +134,14 @@ createLagDiffFeatures.xts = function(obj, lag = 0L, difference = 0L, difference.
   } else {
     stop("No lags or differences were chosen")
   }
-  
+
   if (return.nonlag){
     obj = obj[,c(intersect(work.cols, cols)), drop = FALSE]
     obj = cbind(obj, x)
   } else {
     obj = cbind(obj[,target],x)
   }
-  
+
   if (na.pad == FALSE){
     removeNaPad = 1:(max(lag, seasonal.lag) +
                        (max(difference * difference.lag,
@@ -160,9 +160,9 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
                                       return.nonlag = TRUE) {
   target = getTaskTargetNames(obj)
   data = getTaskData(obj)
-  
+
   nums = sapply(data,is.numeric)
-  
+
   if (!is.null(obj$task.desc$frequency) && frequency == 1L)
     frequency = obj$task.desc$frequency
   if (!is.null(cols)){
@@ -174,8 +174,8 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
   }
   # We store the original columns as we need them for forecasting
   data.original = data
-  
-  
+
+
   data = data[,work.cols, drop = FALSE]
   row.dates = try(as.POSIXct(rownames(data)), silent = TRUE)
   if (is.error(row.dates))
@@ -184,10 +184,10 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
   work.cols.nums = sapply(data,is.numeric)
   # We first go over the numeric columns
   if (any(work.cols.nums)){
-    
+
     data.nums  = xts::xts(data[,nums,drop = FALSE], order.by = row.dates)
     colnames(data.nums) = work.cols[nums]
-    
+
     data.nums = createLagDiffFeatures( obj = data.nums, lag = lag, difference = difference,
                                        difference.lag = difference.lag,
                                        cols = cols, target = target,
@@ -196,7 +196,7 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
                                        seasonal.difference.lag = seasonal.difference.lag,
                                        frequency = frequency, na.pad = na.pad,
                                        return.nonlag = return.nonlag)
-    
+
     data.total[[1]] = as.data.frame(data.nums)
   } else {
     if (return.nonlag)
@@ -204,21 +204,21 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
     else
       data.total[[1]] = NULL
   }
-  
+
   # Then we lag everything else
   if (any(!work.cols.nums)){
-    
+
     data.other = data[,!work.cols.nums, drop = FALSE]
     # This is kind of gross, but we need to preserve our factor levels
     ## and xts objects convert everything to character
     facs = sapply(data.other, is.factor)
     column.fac = colnames(data.other)[facs]
     fac.levels = lapply(data.other[,facs, drop = FALSE], levels)
-    
+
     # Now turn the data.frame into an xts object
     data.other = xts::xts(data.other, order.by = row.dates)
     colnames(data.other) = work.cols[!work.cols.nums]
-    
+
     # We can't difference non-numeric data so it's all set to zero
     data.other = createLagDiffFeatures( obj = data.other, lag = lag, difference = 0L,
                                         difference.lag = 0L,
@@ -231,7 +231,7 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
     data.other = as.data.frame(data.other)
     # We have to go through and reapply the appropriate levels
     facs.lag = lapply(paste0(column.fac,"_"), function(x) stringi::stri_detect_fixed(colnames(data.other), x))
-    
+
     lapply(1:length(facs.lag), function(i) invisible(levels(data.other[,facs.lag[[i]]]) <<- fac.levels[i])) #<<- fac.levels[[i]]))
     data.total[[2]] = data.other
   } else {
@@ -240,7 +240,7 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
     else
       data.total[[2]] = NULL
   }
-  
+
   data.total = filterNull(data.total)
   # make sure removing na padding still gives us the same sizes of data
   min.length = unlist(lapply(data.total, nrow))
@@ -250,7 +250,7 @@ createLagDiffFeatures.Task = function(obj, lag = 0L, difference = 0L,
   #data.total = cbind(data.original[I(nrow(data.original)-min.length + 1):nrow(data.original),target],
   #                   data.total)
   #colnames(data.total)[1:length(target)] = target
-  
+
   obj = changeData(obj,data = data.total)
   data.original = data.original[I(nrow(data) - (max(lag) * frequency + difference + difference.lag +
                                                   max(seasonal.lag) * frequency + seasonal.difference +
@@ -292,26 +292,26 @@ updateLagDiff = function(task, newdata, weights,...) {
   assertDataFrame(newdata)
   if (missing(weights))
     weights = task$weights
-  
-  
-  
+
+
+
   data = rbind(task$task.desc$pre.proc$data.original, newdata)
   row.dates = try(as.POSIXct(rownames(data)), silent = TRUE)
   if (is.error(row.dates))
     stop("The data's rownames must be convertible to POSIXct")
-  
+
   data = xts::xts(data, order.by = row.dates)
   lagdiff.func = function(...){
     createLagDiffFeatures(obj = data,...)
   }
   data = do.call(lagdiff.func, task$task.desc$pre.proc$par.vals)
   data = data.frame(data, row.names = index(data))
-  
+
   obj = changeData(task, data, weights)
   obj
 }
 
 #' @export
-as.data.frame.xts = function(x, ...){
+as.data.frame.xts = function(x, ...) {
   data.frame(row.names = index(x), zoo::coredata(x))
 }

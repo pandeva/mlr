@@ -8,7 +8,7 @@
 #' @param ...
 #'  Used to pass package specific parameters
 #' @export
-forecast = function(object, ...){
+forecast = function(object, ...) {
   UseMethod("forecast")
 }
 
@@ -57,7 +57,7 @@ forecast = function(object, ...){
 #' f = forecast(model, h = 10)
 #' print(f)
 #' getPredictionProbabilities(f)
-forecast.WrappedModel = function(object, newdata = NULL, task, h = 10, ...){
+forecast.WrappedModel = function(object, newdata = NULL, task, h = 10, ...) {
   model = object
   learner = model$learner
   td = model$task.desc
@@ -161,7 +161,7 @@ forecast.WrappedModel = function(object, newdata = NULL, task, h = 10, ...){
                  y = p, time = time.predict, error = error)
 }
 
-makeForecast = function(.data, .newdata, .proc.vals, .h, .td, .model, ...){
+makeForecast = function(.data, .newdata, .proc.vals, .h, .td, .model, ...) {
   forecasts = list()[1:I(.h)]
   for (i in 1:(.h)){
 

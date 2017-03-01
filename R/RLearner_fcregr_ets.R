@@ -63,7 +63,7 @@ updateLearner.fcregr.ets = function(.learner, .model, .newdata = NULL, .task, .t
 }
 
 #'@export
-predictLearner.fcregr.ets = function(.learner, .model, .newdata, ...){
+predictLearner.fcregr.ets = function(.learner, .model, .newdata, ...) {
   se.fit = .learner$predict.type == "quantile"
   if (!se.fit){
     p = as.numeric(forecast::forecast(object =.model$learner.model, ...)$mean)

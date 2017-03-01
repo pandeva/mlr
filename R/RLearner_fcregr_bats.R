@@ -70,7 +70,7 @@ updateLearner.fcregr.bats = function(.learner, .model, .newdata, .task, .truth, 
 }
 
 #'@export
-predictLearner.fcregr.bats = function(.learner, .model, .newdata, ...){
+predictLearner.fcregr.bats = function(.learner, .model, .newdata, ...) {
   se.fit = .learner$predict.type == "quantile"
   if (!se.fit){
     p = as.numeric(forecast::forecast(.model$learner.model, ...)$mean)

@@ -107,7 +107,7 @@ trainLearner.fcregr.garch = function(.learner, .task, .subset, .weights = NULL, 
 }
 
 #'@export
-predictLearner.fcregr.garch = function(.learner, .model, .newdata, ...){
+predictLearner.fcregr.garch = function(.learner, .model, .newdata, ...) {
 
   se.fit = .learner$predict.type == "quantile"
   if (!se.fit){

@@ -30,7 +30,7 @@
 #' arm = makeLearner("fcregr.Arima", h = 1)
 #' trn = train(arm,Timeregr.task, subset = 1:99)
 #' armNew =updateModel(trn, Timeregr.task, newdata = dat[100,])
-updateModel = function(object, task, newdata, subset, weights = NULL, ...){
+updateModel = function(object, task, newdata, subset, weights = NULL, ...) {
 
   #if (!xor(missing(task), missing(newdata)))
   #  stop("Pass either a task object or a newdata data.frame to predict, but not both!")

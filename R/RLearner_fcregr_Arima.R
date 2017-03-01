@@ -48,7 +48,7 @@ trainLearner.fcregr.Arima = function(.learner, .task, .subset, .weights = NULL, 
 }
 
 #'@export
-predictLearner.fcregr.Arima = function(.learner, .model, .newdata, ...){
+predictLearner.fcregr.Arima = function(.learner, .model, .newdata, ...) {
   se.fit = .learner$predict.type == "quantile"
 
   if (all(.model$task.desc$n.feat == 0)){
