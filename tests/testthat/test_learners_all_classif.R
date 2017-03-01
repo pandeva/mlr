@@ -22,7 +22,6 @@ test_that("learners work: classif 61:87", {
 
 test_that("learners work: classif factor and ordered factor", {
 
-  hyperpars = testThatGenerateClassifLearnerHyperPars()
   # binary classif
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
@@ -38,7 +37,6 @@ test_that("learners work: classif factor and ordered factor", {
 
 test_that("learners work: classif prob and weights", {
 
-  hyperpars = testThatGenerateClassifLearnerHyperPars()
   # binary classif
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
@@ -59,7 +57,6 @@ test_that("learners work: classif prob and weights", {
 
 test_that("learners work: classif missing and oobpreds", {
 
-  hyperpars = testThatGenerateClassifLearnerHyperPars()
   # binary classif
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
@@ -79,7 +76,6 @@ test_that("learners work: classif missing and oobpreds", {
 
 test_that("learners work: classif featimp", {
 
-  hyperpars = testThatGenerateClassifLearnerHyperPars()
   # binary classif
   task = subsetTask(binaryclass.task, subset = c(10:20, 180:190),
                     features = getTaskFeatureNames(binaryclass.task)[12:15])
