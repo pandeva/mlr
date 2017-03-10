@@ -4,7 +4,7 @@ makeRLearner.classif.rFerns = function() {
     cl = "classif.rFerns",
     package = "rFerns",
     par.set = makeParamSet(
-      makeIntegerLearnerParam(id = "depth", default = 5L),
+      makeIntegerLearnerParam(id = "depth", default = 5L, lower = 1, upper = 16),
       makeIntegerLearnerParam(id = "ferns", default = 1000L),
       makeLogicalLearnerParam(id = "importance", default = FALSE, tunable = FALSE),
       makeIntegerLearnerParam(id = "reportErrorEvery", default = 0L, lower = 0L, tunable = FALSE),
