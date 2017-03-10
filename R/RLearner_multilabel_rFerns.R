@@ -4,7 +4,7 @@ makeRLearner.multilabel.rFerns = function() {
     cl = "multilabel.rFerns",
     package = "rFerns",
     par.set = makeParamSet(
-      makeIntegerLearnerParam(id = "depth", default = 5L),
+      makeIntegerLearnerParam(id = "depth", default = 5L, lower = 1, upper = 16),
       makeIntegerLearnerParam(id = "ferns", default = 1000L)
     ),
     properties = c("numerics", "factors", "ordered"),
